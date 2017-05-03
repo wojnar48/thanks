@@ -16,9 +16,10 @@ angle at which to fire - this determines the trajectory of the projectile.
 - [ ] On hit game ends and winner is declared
 
 ### Technologies
+- nativeDOM methods for DOM manipulation and event triggering
 - `JavaScript` for game logic
 - `Easeljs` to assist in rendering elements
-- `Browserify` to bundle js files.
+- `webpack` to bundle js files.
 
 ### Implementation Timeline
 
@@ -27,5 +28,3 @@ angle at which to fire - this determines the trajectory of the projectile.
 **Day 2** Implement projectile trajectory physics using projectile motion laws. By the end of the day projectiles should have x,y coordinates across time.
 
 **Day 3** Using x,y values from Day 2, implement the rendering of the flight trajectory
-
-**Day 4** Improve styling
