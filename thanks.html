@@ -4,17 +4,25 @@
     <meta charset="utf-8">
     <title>Thanks</title>
     <style type="text/css">
+      div {
+        margin-top: 80px;
+        display: flex;
+        justify-content: center;
+      }
       canvas {
         border: 2px solid black;
         background-image: url('background.jpg');
         background-size: contain;
         background-repeat: no-repeat;
+        margin: 0 auto;
       }
     </style>
 
   </head>
   <body onload="drawTrajectory();">
-    <canvas id="canvas" width="600" height="400"></canvas>
+    <div>
+      <canvas id="canvas" width="1000" height="600"></canvas>
+    </div>
   </body>
   <script type="application/javascript">
     function drawTrajectory() {
@@ -22,47 +30,39 @@
       if (canvas.getContext) {
         const ctx = canvas.getContext('2d');
 
-        canvas.width = 1000;
-        canvas.height = 600;
-
         ctx.fillStyle = 'rgba(79, 203, 138, 1)';
         ctx.fillRect(0, 400, 1000, 200);
 
         let x = 0;
-        let y = 399;
-        let oldX = 0;
-        let oldY = 399;
-        let xVel = 15;
-        let yVel = -20;
-        const gravity = 1;
+        let yInit = 399;
+        const angle = 45 * Math.PI / 180;
+        const vel = 80;
+        const gravity = 9.8;
 
+        const renderInterval = setInterval(renderPoint, 10);
 
-        const myInterval = setInterval(function () {
-          // logic that tests pixel color
-          const imgData = ctx.getImageData(x, y, 1, 1);
-          console.log(imgData);
-          console.log(`x:${x}, y: ${y}`)
+        function renderPoint () {
+          y = Math.tan(angle) * x - (gravity / (2 * Math.pow(vel, 2) *
+            Math.pow(Math.cos(angle), 2)) * Math.pow(x, 2));
+          y = Math.floor(y);
+          console.log(`x: ${x}, y: ${yInit - y}`);
+          ctx.fillRect(x, yInit - y, 1, 1);
+          x++;
 
-          x += xVel;
-          y += yVel;
+          checkCollisions(x, yInit - y);
+          if (x > 1200) { clearInterval(renderInterval); }
+        }
 
-          if (imgData.data[0] !== 0) {
-            console.log('ITS A HIT')
+        const checkCollisions  = (x, y) => {
+          const pixelData = ctx.getImageData(x, y, 1, 1);
+          if (pixelData.data[0] !== 0) {
+            ctx.beginPath();
+            ctx.arc(x, y, 25, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(255, 0, 0, 255)';
+            ctx.fill();
+            clearInterval(renderInterval);
           }
-
-          yVel += gravity;
-          ctx.beginPath();
-          ctx.moveTo(oldX, oldY);
-          ctx.lineTo(x, y);
-          ctx.stroke();
-          oldX = x;
-          oldY = y;
-
-          if (y > canvas.height) {
-            clearInterval(myInterval);
-          }
-
-        }, 20);
+        };
       }
     }
   </script>
