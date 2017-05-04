@@ -43,27 +43,6 @@ export const drawLand = (ctx) => {
   };
 };
 
-export const drawTank = (ctx) => {
-  const angle = -0.7;
-  const tank = new Image();
-  tank.src = 'tank.png';
-  tank.crossOrigin = "Anonymous";
-  tank.onload = () => {
-    ctx.drawImage(tank, 0, 385);
-    const turret = new Image();
-    turret.src = 'turret.png';
-    turret.crossOrigin = "Anonymous";
-    turret.onload = () => {
-      ctx.save();
-      ctx.translate(30, 397);
-      findExitPoint(30, 397, angle);
-      ctx.rotate(angle);
-      ctx.drawImage(turret, 0, 0);
-      ctx.restore();
-    };
-  };
-};
-
 export const findExitPoint = (x, y, angle) => {
   const xVal = x + Math.cos(-1 * angle) * 4;
   const yVal = y + Math.sin(-1 * angle) * 4;

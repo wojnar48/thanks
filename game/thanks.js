@@ -5,6 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const ctx = canvas.getContext('2d');
   const game = new Game(ctx);
   game.drawLand();
-  game.drawTank();
-  // game.fire();
+  game.tank1.render();
+  game.tank1.fire();
 });
