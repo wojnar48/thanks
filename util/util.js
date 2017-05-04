@@ -1,11 +1,10 @@
 export const drawTrajectory = (ctx) => {
   ctx.fillStyle = 'rgba(79, 203, 138, 1)';
-  ctx.fillRect(0, 400, 1000, 200);
 
   let x = 0;
   let yInit = 399;
   const angle = 60 * Math.PI / 180;
-  const vel = 80;
+  const vel = 100;
   const gravity = 9.8;
 
   const renderPoint = () => {
@@ -15,7 +14,6 @@ export const drawTrajectory = (ctx) => {
     console.log(`x: ${x}, y: ${yInit - y}`);
     ctx.fillRect(x, yInit - y, 1, 1);
     x++;
-
 
     // check for target and ground
     checkCollisions(x, yInit - y);
@@ -37,10 +35,37 @@ export const drawTrajectory = (ctx) => {
 }
 
 export const drawLand = (ctx) => {
-  const img = new Image();
-  img.src = 'land.png';
-  img.crossOrigin = "Anonymous";
-  img.onload = () => {
-    ctx.drawImage(img, 0, 0);
+  const land = new Image();
+  land.src = 'land.png';
+  land.crossOrigin = "Anonymous";
+  land.onload = () => {
+    ctx.drawImage(land, 0, 0);
   };
+};
+
+export const drawTank = (ctx) => {
+  const angle = -0.7;
+  const tank = new Image();
+  tank.src = 'tank.png';
+  tank.crossOrigin = "Anonymous";
+  tank.onload = () => {
+    ctx.drawImage(tank, 0, 385);
+    const turret = new Image();
+    turret.src = 'turret.png';
+    turret.crossOrigin = "Anonymous";
+    turret.onload = () => {
+      ctx.save();
+      ctx.translate(30, 397);
+      findExitPoint(30, 397, angle);
+      ctx.rotate(angle);
+      ctx.drawImage(turret, 0, 0);
+      ctx.restore();
+    };
+  };
+};
+
+export const findExitPoint = (x, y, angle) => {
+  const xVal = x + Math.cos(-1 * angle) * 4;
+  const yVal = y + Math.sin(-1 * angle) * 4;
+  console.log(`x: ${xVal}, y: ${yVal}`);
 };
