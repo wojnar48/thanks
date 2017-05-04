@@ -35,3 +35,12 @@ export const drawTrajectory = (ctx) => {
 
   const renderInterval = setInterval(renderPoint, 10);
 }
+
+export const drawLand = (ctx) => {
+  const img = new Image();
+  img.src = 'land.png';
+  img.crossOrigin = "Anonymous";
+  img.onload = () => {
+    ctx.drawImage(img, 0, 0);
+  };
+};

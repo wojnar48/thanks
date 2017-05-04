@@ -5,8 +5,8 @@ class Game {
     this.ctx = ctx;
   }
 
-  drawTank () {
-
+  drawLand () {
+    Util.drawLand(this.ctx);
   }
 
   fire () {
