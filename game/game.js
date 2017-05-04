@@ -5,6 +5,10 @@ class Game {
     this.ctx = ctx;
   }
 
+  drawTank () {
+
+  }
+
   fire () {
     Util.drawTrajectory(this.ctx);
   }
