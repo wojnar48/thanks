@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Thanks</title>
+    <style type="text/css">
+      canvas {
+        border: 2px solid black;
+        background-image: url('background.jpg');
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+    </style>
+
+  </head>
+  <body onload="drawTrajectory();">
+    <canvas id="canvas" width="600" height="400"></canvas>
+  </body>
+  <script type="application/javascript">
+    function drawTrajectory() {
+      const canvas = document.getElementById('canvas');
+      if (canvas.getContext) {
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = 1000;
+        canvas.height = 600;
+
+        ctx.fillStyle = 'rgba(79, 203, 138, 1)';
+        ctx.fillRect(0, 400, 1000, 200);
+
+        let x = 0;
+        let y = 399;
+        let oldX = 0;
+        let oldY = 399;
+        let xVel = 15;
+        let yVel = -20;
+        const gravity = 1;
+
+
+        const myInterval = setInterval(function () {
+          // logic that tests pixel color
+          const imgData = ctx.getImageData(x, y, 1, 1);
+          console.log(imgData);
+          console.log(`x:${x}, y: ${y}`)
+
+          x += xVel;
+          y += yVel;
+
+          if (imgData.data[0] !== 0) {
+            console.log('ITS A HIT')
+          }
+
+          yVel += gravity;
+          ctx.beginPath();
+          ctx.moveTo(oldX, oldY);
+          ctx.lineTo(x, y);
+          ctx.stroke();
+          oldX = x;
+          oldY = y;
+
+          if (y > canvas.height) {
+            clearInterval(myInterval);
+          }
+
+        }, 20);
+      }
+    }
+  </script>
+</html>
