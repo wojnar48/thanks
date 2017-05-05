@@ -23,7 +23,7 @@ class Tank {
       this.ctx,
       exitX,
       exitY,
-      this.turretAngle, 
+      this.turretAngle,
       this.power);
   }
 
@@ -66,8 +66,12 @@ class Tank {
       this.ctx.drawImage(tank, this.x, this.y);
 
       let exitX, exitY;
-      [exitX, exitY] = Util.findExitPoint(this.x + 36, this.y + 16, this.turretAngle);
-      console.log(exitX, exitY);
+      [exitX, exitY] = Util.findExitPoint(
+        this.x + 36,
+        this.y + 16,
+        this.turretAngle
+      );
+      
       this.ctx.beginPath();
       this.ctx.moveTo(42, 394);
       this.ctx.lineWidth = 3;

@@ -6,5 +6,5 @@ document.addEventListener('DOMContentLoaded', () => {
   ctx.imageSmoothingEnabled = false;
   const game = new Game(ctx);
   game.drawLand();
-  game.tank1.render();
+  // game.tank1.render();
 });
