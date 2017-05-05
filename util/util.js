@@ -1,9 +1,13 @@
-export const drawTrajectory = (ctx) => {
+
+export const DEG_TO_RAD = Math.PI / 180;
+export const RAD_TO_DEG = 180 / Math.PI;
+
+export const drawTrajectory = (ctx, exitX, exitY, turretAngle) => {
   ctx.fillStyle = 'rgba(79, 203, 138, 1)';
 
-  let x = 0;
-  let yInit = 399;
-  const angle = 60 * Math.PI / 180;
+  let x = exitX;
+  let yInit = exitY;
+  const angle = turretAngle * -1;
   const vel = 100;
   const gravity = 9.8;
 
@@ -11,16 +15,19 @@ export const drawTrajectory = (ctx) => {
     let y = Math.tan(angle) * x - (gravity / (2 * Math.pow(vel, 2) *
       Math.pow(Math.cos(angle), 2)) * Math.pow(x, 2));
     y = Math.floor(y);
+
     console.log(`x: ${x}, y: ${yInit - y}`);
     ctx.fillRect(x, yInit - y, 1, 1);
     x++;
 
-    // check for target and ground
-    checkCollisions(x, yInit - y);
+    checkCollisions(x, yInit - y - 1);
     if (x > 1200) { clearInterval(renderInterval); }
   };
 
   const checkCollisions  = (x, y) => {
+    x = Math.floor(x);
+    y = Math.floor(y);
+
     const pixelData = ctx.getImageData(x, y, 1, 1);
     if (pixelData.data[0] !== 0) {
       ctx.beginPath();
@@ -31,8 +38,8 @@ export const drawTrajectory = (ctx) => {
     }
   };
 
-  const renderInterval = setInterval(renderPoint, 10);
-}
+  const renderInterval = setInterval(renderPoint, 5);
+};
 
 export const drawLand = (ctx) => {
   const land = new Image();
@@ -44,7 +51,8 @@ export const drawLand = (ctx) => {
 };
 
 export const findExitPoint = (x, y, angle) => {
-  const xVal = x + Math.cos(-1 * angle) * 4;
-  const yVal = y + Math.sin(-1 * angle) * 4;
+  const xVal = x + Math.cos(-1 * angle) * 32;
+  const yVal = y + Math.sin(-1 * angle) * 32;
   console.log(`x: ${xVal}, y: ${yVal}`);
+  return [xVal, yVal];
 };
