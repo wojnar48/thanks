@@ -1,7 +1,7 @@
 export const DEG_TO_RAD = Math.PI / 180;
 export const RAD_TO_DEG = 180 / Math.PI;
 
-export const drawTrajectory = (ctx, exitX, exitY, turretAngle) => {
+export const drawTrajectory = (ctx, exitX, exitY, turretAngle, power) => {
   ctx.fillStyle = 'rgba(255, 0, 0, 255)';
 
   let x = 0;
@@ -10,7 +10,7 @@ export const drawTrajectory = (ctx, exitX, exitY, turretAngle) => {
   let points = [];
 
   const angle = turretAngle * -1;
-  const vel = 100;
+  const vel = power;
   const gravity = 9.8;
 
   const renderPoint = () => {
@@ -24,7 +24,6 @@ export const drawTrajectory = (ctx, exitX, exitY, turretAngle) => {
     }
     ctx.fillRect(xInit, yInit - y, 1, 1);
     points.push([xInit, yInit - y]);
-
 
     x++;
     xInit++;

@@ -5,8 +5,13 @@
     <title>Thanks</title>
     <style type="text/css">
       div {
+        margin: 0 auto;
+      }
+      
+      .canvas {
         margin-top: 80px;
         display: flex;
+        flex-direction: column;
         justify-content: center;
       }
       canvas {
@@ -16,12 +21,37 @@
         background-repeat: no-repeat;
         margin: 0 auto;
       }
+
+      #control-panel {
+        margin: 0 auto;
+      }
+
+      #angle {
+        width: 40px;
+      }
+
+      #power {
+        width: 40px;
+      }
     </style>
     <script src="bundle.js"></script>
     <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous">
+    </script>
   </head>
   <body>
     <div>
+      <div id="control-panel">
+        <div>
+          <p>Angle:<span id="angle"></span></p>
+        </div>
+        <div>
+          <p>Power:<span id="power"></span></p>
+        </div>
+      </div class="canvas">
       <canvas id="canvas" width="992" height="480"></canvas>
     </div>
   </body>

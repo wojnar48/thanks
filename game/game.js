@@ -4,7 +4,7 @@ import Tank from './tank.js';
 class Game {
   constructor(ctx) {
     this.ctx = ctx;
-    this.tank1 = new Tank(0, 380, ctx, -0.7);
+    this.tank1 = new Tank(10, 380, ctx, -0.7, 100);
   }
 
   handleKeyDown () {
@@ -19,6 +19,14 @@ class Game {
     this.tank1.fire();
   }
 
+  handlePowerUp () {
+    this.tank1.powerUp();
+  }
+
+  handlePowerDown () {
+    this.tank1.powerDown();
+  }
+
   drawLand () {
     Util.drawLand(this.ctx);
     window.addEventListener('keydown', (e) => {
@@ -31,6 +39,12 @@ class Game {
           break;
         case 32:
           this.handleSpaceBar();
+          break;
+        case 39:
+          this.handlePowerUp();
+          break;
+        case 37:
+          this.handlePowerDown();
           break;
       }
     });
