@@ -5,8 +5,10 @@ export const RAD_TO_DEG = 180 / Math.PI;
 export const drawTrajectory = (ctx, exitX, exitY, turretAngle) => {
   ctx.fillStyle = 'rgba(79, 203, 138, 1)';
 
-  let x = exitX;
+  let x = 0;
+  let xInit = exitX;
   let yInit = exitY;
+
   const angle = turretAngle * -1;
   const vel = 100;
   const gravity = 9.8;
@@ -16,11 +18,14 @@ export const drawTrajectory = (ctx, exitX, exitY, turretAngle) => {
       Math.pow(Math.cos(angle), 2)) * Math.pow(x, 2));
     y = Math.floor(y);
 
-    console.log(`x: ${x}, y: ${yInit - y}`);
-    ctx.fillRect(x, yInit - y, 1, 1);
-    x++;
+    // console.log(`x: ${x}, y: ${yInit}`);
+    ctx.fillRect(xInit, yInit - y, 1, 1);
 
-    checkCollisions(x, yInit - y - 1);
+    x++;
+    xInit++;
+    console.log(y);
+
+    checkCollisions(xInit, yInit - y - 1);
     if (x > 1200) { clearInterval(renderInterval); }
   };
 
@@ -52,7 +57,7 @@ export const drawLand = (ctx) => {
 
 export const findExitPoint = (x, y, angle) => {
   const xVal = x + Math.cos(-1 * angle) * 32;
-  const yVal = y + Math.sin(-1 * angle) * 32;
+  const yVal = y - Math.sin(-1 * angle) * 32;
   console.log(`x: ${xVal}, y: ${yVal}`);
   return [xVal, yVal];
 };
