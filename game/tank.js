@@ -10,7 +10,8 @@ class Tank {
 
   fire () {
     let exitX, exitY;
-    [exitX, exitY] = Util.findExitPoint(this.x + 36, this.y + 16, this.turretAngle);
+    // originally 36, 16
+    [exitX, exitY] = Util.findExitPoint(this.x + 40, this.y + 10, this.turretAngle);
     Util.drawTrajectory(this.ctx, exitX, exitY, this.turretAngle);
   }
 
@@ -39,20 +40,9 @@ class Tank {
       console.log(exitX, exitY);
       this.ctx.beginPath();
       this.ctx.moveTo(32, 392);
+      this.ctx.lineWidth = 3;
       this.ctx.lineTo(exitX, exitY);
       this.ctx.stroke();
-
-      // const turret = new Image();
-      // turret.src = 'turret.png';
-      // turret.crossOrigin = "Anonymous";
-      // turret.onload = () => {
-      //   // this.ctx.save();
-      //   this.ctx.translate(36, 396);
-      //   // Util.findExitPoint(30, 397, this.turretAngle);
-      //   this.ctx.rotate(this.turretAngle);
-      //   this.ctx.drawImage(turret, 0, 0);
-      //   this.ctx.restore();
-      // };
     };
   }
 }
