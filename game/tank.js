@@ -24,7 +24,8 @@ class Tank {
       exitX,
       exitY,
       this.turretAngle,
-      this.power);
+      this.power
+    );
   }
 
   updateAngle (angle) {
@@ -71,7 +72,7 @@ class Tank {
         this.y + 16,
         this.turretAngle
       );
-      
+
       this.ctx.beginPath();
       this.ctx.moveTo(42, 394);
       this.ctx.lineWidth = 3;

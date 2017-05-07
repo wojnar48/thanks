@@ -1,30 +1,33 @@
 import * as Util from '../util/util.js';
 import Tank from './tank.js';
+import TankEnemy from './enemy_tank.js';
 
 class Game {
   constructor(ctx) {
     this.ctx = ctx;
     this.tank1 = new Tank(10, 380, ctx, -0.7, 100);
+    this.tank2 = new TankEnemy(820, 320, ctx, -0.7, 100);
+    this.currentMover = this.tank1;
   }
 
   handleKeyDown () {
-    this.tank1.turretDown();
+    this.currentMover.turretDown();
   }
 
   handleKeyUp () {
-    this.tank1.turretUp();
+    this.currentMover.turretUp();
   }
 
   handleSpaceBar () {
-    this.tank1.fire();
+    this.currentMover.fire();
   }
 
   handlePowerUp () {
-    this.tank1.powerUp();
+    this.currentMover.powerUp();
   }
 
   handlePowerDown () {
-    this.tank1.powerDown();
+    this.currentMover.powerDown();
   }
 
   drawLand () {
