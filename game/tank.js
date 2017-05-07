@@ -24,7 +24,8 @@ class Tank {
       exitX,
       exitY,
       this.turretAngle,
-      this.power
+      this.power,
+      'ally'
     );
   }
 

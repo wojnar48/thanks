@@ -4,6 +4,7 @@ import TankEnemy from './enemy_tank.js';
 
 class Game {
   constructor(ctx) {
+    this.gameOver = false;
     this.ctx = ctx;
     this.tank1 = new Tank(10, 380, ctx, -0.7, 100);
     this.tank2 = new TankEnemy(820, 320, ctx, -0.7, 100);
@@ -20,6 +21,11 @@ class Game {
 
   handleSpaceBar () {
     this.currentMover.fire();
+    if (this.currentMover === this.tank1) {
+      this.currentMover = this.tank2;
+    } else {
+      this.currentMover = this.tank1;
+    }
   }
 
   handlePowerUp () {

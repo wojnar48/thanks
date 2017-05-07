@@ -1,7 +1,7 @@
 export const DEG_TO_RAD = Math.PI / 180;
 export const RAD_TO_DEG = 180 / Math.PI;
 
-export const drawTrajectory = (ctx, exitX, exitY, turretAngle, power) => {
+export const drawTrajectory = (ctx, exitX, exitY, turretAngle, power, type) => {
   ctx.fillStyle = 'rgba(255, 0, 0, 255)';
 
   let x = 0;
@@ -26,7 +26,7 @@ export const drawTrajectory = (ctx, exitX, exitY, turretAngle, power) => {
     points.push([xInit, yInit - y]);
 
     x++;
-    xInit++;
+    type === 'ally' ? xInit++ : xInit--;
 
     checkCollisions(xInit, yInit - y - 1);
     if (x > 1200) { clearInterval(renderInterval); }
@@ -65,6 +65,12 @@ export const drawLand = (ctx) => {
 
 export const findExitPoint = (x, y, angle) => {
   const xVal = x + Math.cos(-1 * angle) * 32;
+  const yVal = y - Math.sin(-1 * angle) * 32;
+  return [xVal, yVal];
+};
+
+export const findExitPointEnemy = (x, y, angle) => {
+  const xVal = x - Math.cos(-1 * angle) * 32;
   const yVal = y - Math.sin(-1 * angle) * 32;
   return [xVal, yVal];
 };
