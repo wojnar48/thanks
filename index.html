@@ -10,10 +10,27 @@
       integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
       crossorigin="anonymous">
     </script>
+    <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/main.css" />
   </head>
   <body>
-    <div>
+    <div class="welcome">
+      <div class="welcome-header">
+        <div class="welcome-header-content">
+          <img src="css/tank_left.png" />
+          <h1>Thanks</h1>
+          <img src="css/tank_right.png" />
+        </div>
+      </div>
+      <div class="welcome-body">
+        <p>Welcome to thanks, a game inspired by Amiga's 1991 classic tanx.</p>
+        <p>use left/right arrows to toggle power and up/down arrows to toggle angle.</p>
+      </div>
+      <div>
+        <button>Start</button>
+      </div>
+    </div>
+    <div class="game-container off-screen">
       <div id="control-panel">
         <div>
           <p>Angle:<span id="angle"></span></p>
