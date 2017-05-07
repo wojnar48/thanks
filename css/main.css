@@ -1,0 +1,30 @@
+div {
+  margin: 0 auto;
+}
+
+.canvas {
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+canvas {
+  border: 2px solid black;
+  background-image: url('background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 0 auto;
+}
+
+#control-panel {
+  margin: 0 auto;
+}
+
+#angle {
+  width: 40px;
+}
+
+#power {
+  width: 40px;
+}
