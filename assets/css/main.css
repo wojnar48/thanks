@@ -50,7 +50,7 @@ body {
 }
 
 .welcome-header-content {
-  background-image: url('../images/bg_dark_faded.png');
+  background-image: url('bg_dark_faded.png');
   background-size: cover;
   diplay: flex;
   justify-content: center;
