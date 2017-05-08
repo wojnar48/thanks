@@ -146,7 +146,7 @@ var drawTrajectory = exports.drawTrajectory = function drawTrajectory(ctx, exitX
 
 var drawLand = exports.drawLand = function drawLand(ctx) {
   var land = new Image();
-  land.src = 'thanks/assets/images/land.png';
+  land.src = './assets/images/land.png';
   land.crossOrigin = "Anonymous";
   land.onload = function () {
     ctx.drawImage(land, 0, 0);
