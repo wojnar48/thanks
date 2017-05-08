@@ -79,7 +79,7 @@ Object.defineProperty(exports, "__esModule", {
 var DEG_TO_RAD = exports.DEG_TO_RAD = Math.PI / 180;
 var RAD_TO_DEG = exports.RAD_TO_DEG = 180 / Math.PI;
 
-var drawTrajectory = exports.drawTrajectory = function drawTrajectory(ctx, exitX, exitY, turretAngle, power, type, opponent) {
+var drawTrajectory = exports.drawTrajectory = function drawTrajectory(ctx, exitX, exitY, turretAngle, power, type, opponent, game) {
   ctx.fillStyle = 'rgba(255, 0, 0, 255)';
 
   var x = 0;
@@ -105,13 +105,13 @@ var drawTrajectory = exports.drawTrajectory = function drawTrajectory(ctx, exitX
     x++;
     type === 'ally' ? xInit++ : xInit--;
 
-    checkCollisions(xInit, yInit - y - 1);
+    checkCollisions(xInit, yInit - y - 1, game);
     if (x > 1200) {
       clearInterval(renderInterval);
     }
   };
 
-  var checkCollisions = function checkCollisions(x, y) {
+  var checkCollisions = function checkCollisions(x, y, game) {
     x = Math.floor(x);
     y = Math.floor(y);
 
@@ -138,6 +138,8 @@ var drawTrajectory = exports.drawTrajectory = function drawTrajectory(ctx, exitX
       ctx.fill();
       ctx.globalCompositeOperation = 'source-over';
       clearInterval(renderInterval);
+      game.projectileInAir = false;
+      game.currentMover = opponent;
     }
   };
 
@@ -215,7 +217,7 @@ var Tank = function () {
 
   _createClass(Tank, [{
     key: 'fire',
-    value: function fire(opponent) {
+    value: function fire(game, opponent) {
       var exitX = void 0,
           exitY = void 0;
 
@@ -227,7 +229,7 @@ var Tank = function () {
       exitY = _Util$findExitPoint2[1];
 
 
-      Util.drawTrajectory(this.ctx, exitX, exitY, this.turretAngle, this.power, 'ally', opponent);
+      Util.drawTrajectory(this.ctx, exitX, exitY, this.turretAngle, this.power, 'ally', opponent, game);
     }
   }, {
     key: 'displayName',
@@ -352,9 +354,16 @@ var Game = function () {
     this.tank2 = new _enemy_tank2.default(820, 320, ctx, -0.7, 100);
     this.currentMover = this.tank1;
     this.projectileInAir = false;
+    this.gameOver = false;
   }
 
   _createClass(Game, [{
+    key: 'start',
+    value: function start() {
+      this.tank1.render();
+      this.tank2.render();
+    }
+  }, {
     key: 'handleKeyDown',
     value: function handleKeyDown() {
       this.currentMover.turretDown();
@@ -365,18 +374,6 @@ var Game = function () {
       this.currentMover.turretUp();
     }
   }, {
-    key: 'handleSpaceBar',
-    value: function handleSpaceBar() {
-      var opponent = this.currentMover === this.tank1 ? this.tank2 : this.tank1;
-
-      this.currentMover.fire(opponent);
-      if (this.currentMover === this.tank1) {
-        this.currentMover = this.tank2;
-      } else {
-        this.currentMover = this.tank1;
-      }
-    }
-  }, {
     key: 'handlePowerUp',
     value: function handlePowerUp() {
       this.currentMover.powerUp();
@@ -385,6 +382,14 @@ var Game = function () {
     key: 'handlePowerDown',
     value: function handlePowerDown() {
       this.currentMover.powerDown();
+    }
+  }, {
+    key: 'handleSpaceBar',
+    value: function handleSpaceBar() {
+      var opponent = this.currentMover === this.tank1 ? this.tank2 : this.tank1;
+
+      this.projectileInAir = true;
+      this.currentMover.fire(this, opponent);
     }
   }, {
     key: 'handleStart',
@@ -473,7 +478,7 @@ var EnemyTank = function (_Tank) {
 
   _createClass(EnemyTank, [{
     key: 'fire',
-    value: function fire(opponent) {
+    value: function fire(game, opponent) {
       var exitX = void 0,
           exitY = void 0;
 
@@ -485,7 +490,7 @@ var EnemyTank = function (_Tank) {
       exitY = _Util$findExitPointEn2[1];
 
 
-      Util.drawTrajectory(this.ctx, exitX, exitY, this.turretAngle, this.power, 'enemy', opponent);
+      Util.drawTrajectory(this.ctx, exitX, exitY, this.turretAngle, this.power, 'enemy', opponent, game);
     }
   }, {
     key: 'displayName',
@@ -547,9 +552,12 @@ document.addEventListener('DOMContentLoaded', function () {
   var ctx = canvas.getContext('2d');
   var game = new _game2.default(ctx);
   game.drawLand();
-  game.tank1.render();
-  game.tank2.render();
+  game.start();
 });
+
+// move player update logic to game
+// see if draw trajectory method can be refactored
+// probably makes sense to move trajectory method into tank class
 
 /***/ })
 /******/ ]);
