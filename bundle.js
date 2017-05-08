@@ -347,11 +347,11 @@ var Game = function () {
   function Game(ctx) {
     _classCallCheck(this, Game);
 
-    this.gameOver = false;
     this.ctx = ctx;
     this.tank1 = new _tank2.default(10, 380, ctx, -0.7, 100);
     this.tank2 = new _enemy_tank2.default(820, 320, ctx, -0.7, 100);
     this.currentMover = this.tank1;
+    this.projectileInAir = false;
   }
 
   _createClass(Game, [{
