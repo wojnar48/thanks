@@ -103,7 +103,7 @@ var drawTrajectory = exports.drawTrajectory = function drawTrajectory(ctx, exitX
     points.push([xInit, yInit - y]);
 
     x++;
-    type === 'ally' ? xInit++ : xInit--;
+    type === 'Player' ? xInit++ : xInit--;
 
     checkCollisions(xInit, yInit - y - 1, game);
     if (x > 1200) {
@@ -140,6 +140,9 @@ var drawTrajectory = exports.drawTrajectory = function drawTrajectory(ctx, exitX
       clearInterval(renderInterval);
       game.projectileInAir = false;
       game.currentMover = opponent;
+      game.currentMover.updatePower();
+      game.currentMover.updateAngle();
+      game.currentMover.displayName();
     }
   };
 
@@ -229,7 +232,7 @@ var Tank = function () {
       exitY = _Util$findExitPoint2[1];
 
 
-      Util.drawTrajectory(this.ctx, exitX, exitY, this.turretAngle, this.power, 'ally', opponent, game);
+      Util.drawTrajectory(this.ctx, exitX, exitY, this.turretAngle, this.power, this.tankName, opponent, game);
     }
   }, {
     key: 'displayName',
@@ -490,7 +493,7 @@ var EnemyTank = function (_Tank) {
       exitY = _Util$findExitPointEn2[1];
 
 
-      Util.drawTrajectory(this.ctx, exitX, exitY, this.turretAngle, this.power, 'enemy', opponent, game);
+      Util.drawTrajectory(this.ctx, exitX, exitY, this.turretAngle, this.power, this.tankName, opponent, game);
     }
   }, {
     key: 'displayName',
@@ -554,10 +557,6 @@ document.addEventListener('DOMContentLoaded', function () {
   game.drawLand();
   game.start();
 });
-
-// move player update logic to game
-// see if draw trajectory method can be refactored
-// probably makes sense to move trajectory method into tank class
 
 /***/ })
 /******/ ]);
