@@ -2,6 +2,7 @@ import * as Util from '../util/util.js';
 
 class Tank {
   constructor(x, y, ctx, angle, power) {
+    this.tankName = 'Player';
     this.ctx = ctx;
     this.turretAngle = angle;
     this.power = power;
@@ -9,9 +10,8 @@ class Tank {
     this.y = y;
   }
 
-  fire () {
+  fire (opponent) {
     let exitX, exitY;
-    // originally 36, 16
     [exitX, exitY] = Util.findExitPoint(
       this.x + 40,
       this.y + 10,
@@ -25,16 +25,22 @@ class Tank {
       exitY,
       this.turretAngle,
       this.power,
-      'ally'
+      'ally',
+      opponent
     );
   }
 
-  updateAngle (angle) {
-    $('#angle').text(angle * -1);
+  displayName () {
+    $('#player').text(this.tankName);
   }
 
-  updatePower (power) {
-    $('#power').text(power);
+  updateAngle () {
+    const degrees = Number(this.turretAngle * Util.RAD_TO_DEG).toFixed(2);
+    $('#angle').text(degrees * -1);
+  }
+
+  updatePower () {
+    $('#power').text(this.power);
   }
 
   turretDown () {
@@ -80,6 +86,10 @@ class Tank {
       this.ctx.lineTo(exitX, exitY);
       this.ctx.stroke();
     };
+
+    this.updatePower();
+    this.updateAngle();
+    this.displayName();
   }
 }
 

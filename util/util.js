@@ -1,7 +1,14 @@
 export const DEG_TO_RAD = Math.PI / 180;
 export const RAD_TO_DEG = 180 / Math.PI;
 
-export const drawTrajectory = (ctx, exitX, exitY, turretAngle, power, type) => {
+export const drawTrajectory = (
+  ctx,
+  exitX,
+  exitY,
+  turretAngle,
+  power,
+  type,
+  opponent) => {
   ctx.fillStyle = 'rgba(255, 0, 0, 255)';
 
   let x = 0;
@@ -36,6 +43,17 @@ export const drawTrajectory = (ctx, exitX, exitY, turretAngle, power, type) => {
     x = Math.floor(x);
     y = Math.floor(y);
 
+    if (checkHit(x, y, opponent)) {
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.fillStyle = 'rgba(255, 0, 0, 255)';
+      ctx.beginPath();
+      ctx.arc(x, y, 80, 0, Math.PI * 2);
+      ctx.fill();
+      gameOver(ctx);
+      clearInterval(renderInterval);
+      return;
+    }
+
     const pixelData = ctx.getImageData(x, y, 1, 1);
     if (pixelData.data[0] !== 0) {
       points.forEach(point => {
@@ -51,7 +69,7 @@ export const drawTrajectory = (ctx, exitX, exitY, turretAngle, power, type) => {
     }
   };
 
-  const renderInterval = setInterval(renderPoint, 5);
+  const renderInterval = setInterval(renderPoint, 2);
 };
 
 export const drawLand = (ctx) => {
@@ -73,4 +91,18 @@ export const findExitPointEnemy = (x, y, angle) => {
   const xVal = x - Math.cos(-1 * angle) * 32;
   const yVal = y - Math.sin(-1 * angle) * 32;
   return [xVal, yVal];
+};
+
+export const checkHit = (x, y, opponent) => {
+  if ((opponent.x - 20 <= x) && (x <= opponent.x + 20) &&
+    (opponent.y - 20 <= y) && (y <= opponent.y + 20)) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+export const gameOver = (ctx) => {
+  $('.game-container').addClass('off-screen');
+  $('#game-over').removeClass('off-screen');
 };

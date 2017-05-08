@@ -4,11 +4,11 @@ import Tank from './tank.js';
 class EnemyTank extends Tank {
   constructor(x, y, ctx, angle, power) {
     super(x, y, ctx, angle, power);
+    this.tankName = 'CPU';
   }
 
-  fire () {
+  fire (opponent) {
     let exitX, exitY;
-    // originally 36, 16
     [exitX, exitY] = Util.findExitPointEnemy(
       this.x + 30,
       this.y + 10,
@@ -22,8 +22,13 @@ class EnemyTank extends Tank {
       exitY,
       this.turretAngle,
       this.power,
-      'enemy'
+      'enemy',
+      opponent
     );
+  }
+
+  displayName () {
+    $('#player').text(this.tankName);
   }
 
   render () {
@@ -42,7 +47,6 @@ class EnemyTank extends Tank {
       );
 
       this.ctx.beginPath();
-      console.log(`exitX: ${exitX}, exitY: ${exitY}`);
       this.ctx.moveTo(this.x + 28, this.y + 13);
       this.ctx.lineWidth = 3;
       this.ctx.lineTo(exitX, exitY);

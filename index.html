@@ -18,7 +18,7 @@
       <div class="welcome-header">
         <div class="welcome-header-content">
           <img src="css/tank_left.png" />
-          <h1>Thanks</h1>
+          <h1>thanks</h1>
           <img src="css/tank_right.png" />
         </div>
       </div>
@@ -27,19 +27,22 @@
         <p>use left/right arrows to toggle power and up/down arrows to toggle angle.</p>
       </div>
       <div>
-        <button>Start</button>
+        <button id="begin">Start</button>
       </div>
     </div>
     <div class="game-container off-screen">
       <div id="control-panel">
-        <div>
+        <div class="settings">
           <p>Angle:<span id="angle"></span></p>
-        </div>
-        <div>
           <p>Power:<span id="power"></span></p>
+          <p>Gravity:<span id="gravity"></span>1G</p>
+          <p>Player:<span id="player"></span></p>
         </div>
       </div class="canvas">
       <canvas id="canvas" width="992" height="480"></canvas>
+    </div>
+    <div id="game-over" class="off-screen">
+      <h1>Game Over!</h1>
     </div>
   </body>
 </html>

@@ -1,24 +1,36 @@
 body {
-  position: fixed;
-  width: 100vw;
+  width: 992px;
   font-family: 'VT323', monospace;
   color: #545261;
-  background-image: url('bg_dark.png');
+  background-image: url('bg_dark_faded.png');
   background-size: cover;
   background-repeat: no-repeat;
-  opacity: 0.9;
 }
 
 .game-container {
-  width: 1000px;
+  position: fixed;
+  top: 80px;
+  left: 0;
+  right: 0;
+  background-image: url('bg_dark.png');
+  background-size: cover;
+  width: 992px;
   margin: 0 auto;
+  border: 10px solid black;
+}
+
+.game-container span {
+  margin-left: 10px;
 }
 
 .off-screen {
-  transform: translateX(-2000px);
+  transform: translateY(-9999px);
 }
 
 .welcome {
+  position: fixed;
+  left: 0;
+  right: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,7 +39,6 @@ body {
   margin: 80px auto;
   background: #ece2e2;
   border: 3px solid black;
-  opacity: 1;
 }
 
 .welcome-header {
@@ -77,11 +88,7 @@ body {
 }
 
 canvas {
-  border: 2px solid black;
-  background-image: url('bg_dark.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  margin: 0 auto;
+  margin-top: 5px;
 }
 
 #control-panel {
@@ -94,4 +101,31 @@ canvas {
 
 #power {
   width: 40px;
+}
+
+#control-panel {
+  position: relative;
+  left: 0;
+}
+
+#control-panel p {
+  margin: 0;
+}
+
+.settings {
+  font-size: 26px;
+  color: #fff;
+  margin-left: 10px;
+}
+
+#game-over {
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+  font-size: 62px;
+  color: black;
 }

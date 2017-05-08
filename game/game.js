@@ -20,7 +20,11 @@ class Game {
   }
 
   handleSpaceBar () {
-    this.currentMover.fire();
+    const opponent = this.currentMover === this.tank1 ?
+      this.tank2 :
+      this.tank1;
+
+    this.currentMover.fire(opponent);
     if (this.currentMover === this.tank1) {
       this.currentMover = this.tank2;
     } else {
@@ -34,6 +38,11 @@ class Game {
 
   handlePowerDown () {
     this.currentMover.powerDown();
+  }
+
+  handleStart () {
+    $('.game-container').removeClass('off-screen');
+    $('.welcome').addClass('off-screen');
   }
 
   drawLand () {
@@ -57,10 +66,12 @@ class Game {
           break;
       }
     });
-    canvas.addEventListener('mousemove', (e) => {
-      const rect = canvas.getBoundingClientRect();
-      console.log(e.clientX - rect.left, e.clientY - rect.top);
-    });
+    // canvas.addEventListener('mousemove', (e) => {
+    //   const rect = canvas.getBoundingClientRect();
+    //   console.log(e.clientX - rect.left, e.clientY - rect.top);
+    // });
+
+    $('#begin').on('click', this.handleStart);
   }
 }
 
