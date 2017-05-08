@@ -146,7 +146,7 @@ var drawTrajectory = exports.drawTrajectory = function drawTrajectory(ctx, exitX
 
 var drawLand = exports.drawLand = function drawLand(ctx) {
   var land = new Image();
-  land.src = '/thanks/assets/images/land.png';
+  land.src = 'thanks/assets/images/land.png';
   land.crossOrigin = "Anonymous";
   land.onload = function () {
     ctx.drawImage(land, 0, 0);
@@ -277,7 +277,7 @@ var Tank = function () {
       var _this = this;
 
       var tank = new Image();
-      tank.src = '/thanks/assets/images/tank.png';
+      tank.src = 'thanks/assets/images/tank.png';
       tank.crossOrigin = "Anonymous";
       tank.onload = function () {
         _this.ctx.clearRect(_this.x, _this.y - 20, 70, 60);
@@ -498,7 +498,7 @@ var EnemyTank = function (_Tank) {
       var _this2 = this;
 
       var tank = new Image();
-      tank.src = '/thanks/assets/images/tank_enemy.png';
+      tank.src = 'thanks/assets/images/tank_enemy.png';
       tank.crossOrigin = "Anonymous";
       tank.onload = function () {
         _this2.ctx.clearRect(_this2.x - 20, _this2.y - 20, 80, 60);
