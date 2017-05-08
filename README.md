@@ -36,7 +36,7 @@ Once launched, the snippet below (taken from the drawTrajectory method)
 provides the core logic for 2D projectile motion from which the x, y
 coordinates are obtained given gravity, turret angle and power setting (velocity).
 
-![thanks trajectory][thanks_view]
+![thanks trajectory][thanks_trajectory]
 
 ```js
 const renderPoint = () => {
