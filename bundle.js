@@ -475,7 +475,7 @@ var EnemyTank = function (_Tank) {
 
     var _this = _possibleConstructorReturn(this, (EnemyTank.__proto__ || Object.getPrototypeOf(EnemyTank)).call(this, x, y, ctx, angle, power));
 
-    _this.tankName = 'Axis';
+    _this.tankName = 'Enemy';
     return _this;
   }
 
