@@ -95,15 +95,15 @@ var drawTrajectory = exports.drawTrajectory = function drawTrajectory(ctx, exitX
     var y = Math.tan(angle) * x - gravity / (2 * Math.pow(vel, 2) * Math.pow(Math.cos(angle), 2)) * Math.pow(x, 2);
     y = Math.floor(y);
 
-    if (points.length > 10) {
-      var point = points.shift();
-      ctx.clearRect(point[0] - 1, point[1] - 1, 3, 3);
-    }
+    // if (points.length > 10) {
+    //   let point = points.shift();
+    //   ctx.clearRect(point[0] - 1, point[1] - 1, 3, 3);
+    // }
     ctx.fillRect(xInit, yInit - y, 1, 1);
     points.push([xInit, yInit - y]);
 
     x++;
-    type === 'Player' ? xInit++ : xInit--;
+    type === 'Ally' ? xInit++ : xInit--;
 
     checkCollisions(xInit, yInit - y - 1, game);
     if (x > 1200) {
@@ -210,7 +210,7 @@ var Tank = function () {
   function Tank(x, y, ctx, angle, power) {
     _classCallCheck(this, Tank);
 
-    this.tankName = 'Player';
+    this.tankName = 'Ally';
     this.ctx = ctx;
     this.turretAngle = angle;
     this.power = power;
@@ -475,7 +475,7 @@ var EnemyTank = function (_Tank) {
 
     var _this = _possibleConstructorReturn(this, (EnemyTank.__proto__ || Object.getPrototypeOf(EnemyTank)).call(this, x, y, ctx, angle, power));
 
-    _this.tankName = 'CPU';
+    _this.tankName = 'Axis';
     return _this;
   }
 
