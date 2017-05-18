@@ -95,10 +95,6 @@ var drawTrajectory = exports.drawTrajectory = function drawTrajectory(ctx, exitX
     var y = Math.tan(angle) * x - gravity / (2 * Math.pow(vel, 2) * Math.pow(Math.cos(angle), 2)) * Math.pow(x, 2);
     y = Math.floor(y);
 
-    // if (points.length > 10) {
-    //   let point = points.shift();
-    //   ctx.clearRect(point[0] - 1, point[1] - 1, 3, 3);
-    // }
     ctx.fillRect(xInit, yInit - y, 1, 1);
     points.push([xInit, yInit - y]);
 
@@ -127,7 +123,7 @@ var drawTrajectory = exports.drawTrajectory = function drawTrajectory(ctx, exitX
     }
 
     var pixelData = ctx.getImageData(x, y, 1, 1);
-    if (pixelData.data[0] !== 0) {
+    if (pixelData.data[0] !== 0 || x < 0 || x > 1200) {
       points.forEach(function (point) {
         ctx.clearRect(point[0] - 1, point[1] - 1, 3, 3);
       });
@@ -389,6 +385,10 @@ var Game = function () {
   }, {
     key: 'handleSpaceBar',
     value: function handleSpaceBar() {
+      if (this.projectileInAir) {
+        return;
+      }
+
       var opponent = this.currentMover === this.tank1 ? this.tank2 : this.tank1;
 
       this.projectileInAir = true;

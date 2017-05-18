@@ -92,7 +92,10 @@ canvas {
 }
 
 #control-panel {
+  position: relative;
+  left: 0;
   margin: 0 auto;
+  width: 200px;
 }
 
 #angle {
@@ -103,13 +106,9 @@ canvas {
   width: 40px;
 }
 
-#control-panel {
-  position: relative;
-  left: 0;
-}
-
 #control-panel p {
   margin: 0;
+  width: 200px;
 }
 
 .settings {
