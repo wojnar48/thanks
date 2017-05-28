@@ -249,16 +249,20 @@ var Tank = function () {
   }, {
     key: 'turretDown',
     value: function turretDown() {
-      this.turretAngle += Util.DEG_TO_RAD;
-      this.render();
-      this.updateAngle(this.turretAngle * Util.RAD_TO_DEG);
+      if (this.turretAngle * -1 > 0) {
+        this.turretAngle += Util.DEG_TO_RAD;
+        this.render();
+        this.updateAngle(this.turretAngle * Util.RAD_TO_DEG);
+      }
     }
   }, {
     key: 'turretUp',
     value: function turretUp() {
-      this.turretAngle -= Util.DEG_TO_RAD;
-      this.render();
-      this.updateAngle(this.turretAngle * Util.RAD_TO_DEG);
+      if (this.turretAngle * -1 < 1.57) {
+        this.turretAngle -= Util.DEG_TO_RAD;
+        this.render();
+        this.updateAngle(this.turretAngle * Util.RAD_TO_DEG);
+      }
     }
   }, {
     key: 'powerUp',
