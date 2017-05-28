@@ -12,11 +12,8 @@ body {
   top: 80px;
   left: 0;
   right: 0;
-  background-image: url('bg_dark.png');
-  background-size: cover;
   width: 992px;
   margin: 0 auto;
-  border: 10px solid black;
 }
 
 .game-container span {
@@ -88,7 +85,11 @@ body {
 }
 
 canvas {
+  background-image: url('bg_dark.png');
+  background-size: cover;
+  width: 992px;
   margin-top: 5px;
+  border: 10px solid black;
 }
 
 #control-panel {
