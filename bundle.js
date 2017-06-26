@@ -138,7 +138,7 @@ var drawTrajectory = exports.drawTrajectory = function drawTrajectory(ctx, exitX
       game.currentMover = opponent;
       game.currentMover.updatePower();
       game.currentMover.updateAngle();
-      game.currentMover.displayName();
+      game.currentMover.updateInfo();
     }
   };
 
@@ -231,9 +231,13 @@ var Tank = function () {
       Util.drawTrajectory(this.ctx, exitX, exitY, this.turretAngle, this.power, this.tankName, opponent, game);
     }
   }, {
-    key: 'displayName',
-    value: function displayName() {
-      $('#player').text(this.tankName);
+    key: 'updateInfo',
+    value: function updateInfo() {
+      if (this.tankName === 'Ally') {
+        $('#current-player').css('justify-content', 'flex-start');
+      } else {
+        $('#current-player').css('justify-content', 'flex-end');
+      }
     }
   }, {
     key: 'updateAngle',
@@ -308,7 +312,7 @@ var Tank = function () {
 
       this.updatePower();
       this.updateAngle();
-      this.displayName();
+      this.updateInfo();
     }
   }]);
 
@@ -396,6 +400,7 @@ var Game = function () {
       var opponent = this.currentMover === this.tank1 ? this.tank2 : this.tank1;
 
       this.projectileInAir = true;
+      this.currentMover.updateInfo();
       this.currentMover.fire(this, opponent);
     }
   }, {

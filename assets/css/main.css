@@ -31,8 +31,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 400px;
-  height: 650px;
+  width: 500px;
+  height: 600px;
   margin: 80px auto;
   background: #ece2e2;
   border: 3px solid black;
@@ -65,7 +65,7 @@ body {
 }
 
 .welcome-body {
-  width: 200px;
+  width: 300px;
   font-size: 26px;
 }
 
